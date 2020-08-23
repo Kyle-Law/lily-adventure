@@ -13,6 +13,9 @@ export default {
       gravity: { y: 0 },
     },
   },
+  dom: {
+    createContainer: true,
+  },
   plugins: {
     scene: [
       {

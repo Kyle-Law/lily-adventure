@@ -60,6 +60,7 @@ export default class Player extends MatterEntity {
 
   onDeath() {
     // this.sys.game.globals.bgMusic.stop();
+    // this.model = this.sys.game.globals.model;
     const music = this.scene.sound.add("die");
     music.play();
     this.anims.stop();
