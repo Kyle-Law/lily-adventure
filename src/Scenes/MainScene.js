@@ -18,7 +18,6 @@ export default class MainScene extends Phaser.Scene {
   }
 
   create() {
-    // if (this.sound) this.sound.play();
     const map = this.make.tilemap({ key: "map" });
     this.map = map;
     const tileset = map.addTilesetImage("IceTileset", "tiles", 32, 32, 1, 2);

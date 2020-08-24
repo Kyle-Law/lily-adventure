@@ -67,6 +67,7 @@ export default class Player extends MatterEntity {
     this.setTexture("items", 0);
     this.setOrigin(0.5);
     this.spriteWeapon.destroy();
+    setTimeout(() => this.scene.scene.start("GameOver"), 1000);
   }
 
   update() {

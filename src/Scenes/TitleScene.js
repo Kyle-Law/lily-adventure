@@ -1,6 +1,7 @@
 import Phaser from "phaser";
 import config from "../Config/config";
 import Button from "../Objects/Button";
+import Player from "../Classes/Player";
 
 export default class TitleScene extends Phaser.Scene {
   constructor() {
@@ -8,6 +9,26 @@ export default class TitleScene extends Phaser.Scene {
   }
 
   create() {
+    this.textInstructions = this.add.text(200, 100, `Lily's Adventure`, {
+      fontSize: 40,
+    });
+
+    this.player = new Player({
+      scene: this,
+      x: 380,
+      y: 90,
+      texture: "princess",
+      frame: "princess_idle_1",
+    });
+    this.player.setScale(2);
+    this.player.anims.play("princess_walk", true);
+    // this.add.atlas(
+    //   "princess",
+    //   "assets/images/princess.png",
+    //   "assets/images/princess_atlas.json"
+    // );
+    // this.add.animation("princess_anim", "assets/images/princess_anim.json");
+
     // Game
     this.gameButton = new Button(
       this,
