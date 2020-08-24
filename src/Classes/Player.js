@@ -63,11 +63,11 @@ export default class Player extends MatterEntity {
     // this.model = this.sys.game.globals.model;
     const music = this.scene.sound.add("die");
     music.play();
-    this.anims.stop();
-    this.setTexture("items", 0);
-    this.setOrigin(0.5);
-    this.spriteWeapon.destroy();
-    setTimeout(() => this.scene.scene.start("GameOver"), 1000);
+    // this.anims.stop();
+    // this.setTexture("items", 0);
+    // this.setOrigin(0.5);
+    // this.spriteWeapon.destroy();
+    this.scene.scene.start("GameOver");
   }
 
   update() {

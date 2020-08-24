@@ -1,16 +1,17 @@
 import Phaser from "phaser";
 import Button from "../Objects/Button";
 import config from "../Config/config";
-import { postScores } from "../Objects/API";
+import { postScore } from "../Objects/API";
+import LocalStorage from "../Objects/localStorage";
 
 export default class GameOverScene extends Phaser.Scene {
   constructor() {
-    super({ key: "GameOver" });
+    super("GameOver");
   }
 
   init() {
     this.model = this.sys.game.globals.model;
-    this.gameScene = this.scene.get("Main");
+    this.gameScene = this.scene.get("Game");
   }
 
   preload() {
@@ -19,13 +20,14 @@ export default class GameOverScene extends Phaser.Scene {
 
   create() {
     const user = this.sys.game.globals.model.userName;
-    // console.log(user);
 
-    // console.log(this.sys.game.globals.model.score);
+    const score = localStorage.getItem("store");
+    localStorage.clear();
+
     this.score = this.add.text(
       230,
       30,
-      `Hello ${user}, your score is: ${this.sys.game.globals.model.score}`,
+      `Hello ${user}, your score is: ${score}`,
       {
         fontFamily: "monospace",
         fontSize: 20,
@@ -35,28 +37,16 @@ export default class GameOverScene extends Phaser.Scene {
       }
     );
 
-    this.menuButton = new Button(
+    // postScore(this.model.userName, this.model.score);
+
+    this.gameButton = new Button(
       this,
       400,
-      500,
+      config.height / 2 + 170,
       "blueButton1",
       "blueButton2",
-      "Restart",
-      "Welcome"
+      "Submit",
+      "LeaderBoard"
     );
-
-    const style =
-      "background: url(assets/ui/blue_button02.png); border: none; border-radius: 5px; color: #fff;";
-    const gameButton = this.add.dom(590, 412, "button", style, "Play");
-    gameButton.scaleX = 1.5;
-    gameButton.scaleY = 1.7;
-    gameButton.addListener("click");
-
-    gameButton.on("click", () => {
-      this.model = this.sys.game.globals.model;
-      this.model.score = 0;
-      const mainScene = this.scene.get("Main");
-      mainScene.scene.restart();
-    });
   }
 }
