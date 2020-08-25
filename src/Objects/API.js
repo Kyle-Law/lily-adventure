@@ -1,18 +1,17 @@
-import 'regenerator-runtime';
-
+import "regenerator-runtime";
 
 const API = (() => {
   async function getScores() {
     try {
       const scores = await fetch(
-        'https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/EoD8C5Y4zROlv7siBnqH/scores',
+        "https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/EoD8C5Y4zROlv7siBnqH/scores",
         {
-          method: 'GET',
+          method: "GET",
           headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
+            Accept: "application/json",
+            "Content-Type": "application/json",
           },
-        },
+        }
       );
 
       return scores.json();
@@ -24,18 +23,18 @@ const API = (() => {
   async function postScores(name, score) {
     try {
       const result = await fetch(
-        'https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/EoD8C5Y4zROlv7siBnqH/scores',
+        "https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/EoD8C5Y4zROlv7siBnqH/scores",
         {
-          method: 'POST',
+          method: "POST",
           headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
+            Accept: "application/json",
+            "Content-Type": "application/json",
           },
           body: JSON.stringify({
             user: name,
             score,
           }),
-        },
+        }
       );
 
       return result.json();
