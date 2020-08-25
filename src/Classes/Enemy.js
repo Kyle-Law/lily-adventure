@@ -1,30 +1,30 @@
 /* eslint-disable import/extensions */
 /* eslint-disable no-lonely-if */
-import Phaser from 'phaser';
-import MatterEntity from './MatterEntity.js';
+import Phaser from "phaser";
+import MatterEntity from "./MatterEntity.js";
 
 export default class Enemy extends MatterEntity {
   static preload(scene) {
     scene.load.atlas(
-      'enemies',
-      'assets/images/enemies.png',
-      'assets/images/enemies_atlas.json',
+      "enemies",
+      "src/assets/images/enemies.png",
+      "src/assets/images/enemies_atlas.json"
     );
-    scene.load.animation('enemies_anim', 'assets/images/enemies_anim.json');
-    scene.load.audio('bear', 'assets/audio/bear.mp3');
-    scene.load.audio('wolf', 'assets/audio/wolf.mp3');
-    scene.load.audio('ent', 'assets/audio/ent.mp3');
+    scene.load.animation("enemies_anim", "src/assets/images/enemies_anim.json");
+    scene.load.audio("bear", "src/assets/audio/bear.mp3");
+    scene.load.audio("wolf", "src/assets/audio/wolf.mp3");
+    scene.load.audio("ent", "src/assets/audio/ent.mp3");
   }
 
   constructor(data) {
     const { scene, enemy } = data;
     const drops = [270, 270];
-    const health = enemy.properties.find((p) => p.name === 'health').value;
+    const health = enemy.properties.find((p) => p.name === "health").value;
     super({
       scene,
       x: enemy.x,
       y: enemy.y,
-      texture: 'enemies',
+      texture: "enemies",
       frame: `${enemy.name}_idle_1`,
       drops,
       health,
@@ -34,11 +34,11 @@ export default class Enemy extends MatterEntity {
     const { Body, Bodies } = Phaser.Physics.Matter.Matter;
     const enemyCollider = Bodies.circle(this.x, this.y, 12, {
       isSensor: false,
-      label: 'enemyCollider',
+      label: "enemyCollider",
     });
     const enemySensor = Bodies.circle(this.x, this.y, 80, {
       isSensor: true,
-      label: 'enemySensor',
+      label: "enemySensor",
     });
     const compoundBody = Body.create({
       parts: [enemyCollider, enemySensor],
@@ -50,10 +50,11 @@ export default class Enemy extends MatterEntity {
       objectA: [enemySensor],
       callback: (other) => {
         if (
-          other.gameObjectB
-          && other.gameObjectB.name === 'player'
-          && !other.gameObjectB.dead
-        ) this.attacking = other.gameObjectB;
+          other.gameObjectB &&
+          other.gameObjectB.name === "player" &&
+          !other.gameObjectB.dead
+        )
+          this.attacking = other.gameObjectB;
       },
       context: this.scene,
     });
