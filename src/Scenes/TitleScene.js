@@ -1,40 +1,40 @@
-import Phaser from "phaser";
-import config from "../Config/config";
-import Button from "../Objects/Button";
-import Player from "../Classes/Player";
-import Resource from "../Classes/Resource";
-import Enemy from "../Classes/Enemy";
+import Phaser from 'phaser';
+import config from '../Config/config';
+import Button from '../Objects/Button';
+import Player from '../Classes/Player';
+import Resource from '../Classes/Resource';
+import Enemy from '../Classes/Enemy';
 
 export default class TitleScene extends Phaser.Scene {
   constructor() {
-    super("Title");
+    super('Title');
   }
 
-  preload(){
+  preload() {
     // load assets needed in our game
-    this.load.image("blueButton1", "assets/ui/blue_button02.png");
-    this.load.image("blueButton2", "assets/ui/blue_button03.png");
-    this.load.image("phaserLogo", "assets/logo.png");
-    this.load.image("box", "assets/ui/grey_box.png");
-    this.load.image("checkedBox", "assets/ui/blue_boxCheckmark.png");
-    this.load.image("upKey", "assets/guide/KeyboardButtonsDir_up.png");
-    this.load.image("downKey", "assets/guide/KeyboardButtonsDir_down.png");
-    this.load.image("leftKey", "assets/guide/KeyboardButtonsDir_left.png");
-    this.load.image("rightKey", "assets/guide/KeyboardButtonsDir_right.png");
+    this.load.image('blueButton1', 'assets/ui/blue_button02.png');
+    this.load.image('blueButton2', 'assets/ui/blue_button03.png');
+    this.load.image('phaserLogo', 'assets/logo.png');
+    this.load.image('box', 'assets/ui/grey_box.png');
+    this.load.image('checkedBox', 'assets/ui/blue_boxCheckmark.png');
+    this.load.image('upKey', 'assets/guide/KeyboardButtonsDir_up.png');
+    this.load.image('downKey', 'assets/guide/KeyboardButtonsDir_down.png');
+    this.load.image('leftKey', 'assets/guide/KeyboardButtonsDir_left.png');
+    this.load.image('rightKey', 'assets/guide/KeyboardButtonsDir_right.png');
     this.load.image(
-      "spaceKey",
-      "assets/guide/OnscreenKeyboardButtonsSpace.png"
+      'spaceKey',
+      'assets/guide/OnscreenKeyboardButtonsSpace.png',
     );
-    this.load.audio("bgMusic", ["assets/TownTheme.mp3"]);
+    this.load.audio('bgMusic', ['assets/TownTheme.mp3']);
     Player.preload(this);
     Enemy.preload(this);
     Resource.preload(this);
-    this.load.image("tiles", "assets/images/IceTileset-extruded.png");
-    this.load.tilemapTiledJSON("map", "assets/images/map2.json");
+    this.load.image('tiles', 'assets/images/IceTileset-extruded.png');
+    this.load.tilemapTiledJSON('map', 'assets/images/map2.json');
   }
 
   create() {
-    this.textInstructions = this.add.text(200, 100, `Lily's Adventure`, {
+    this.textInstructions = this.add.text(200, 100, 'Lily\'s Adventure', {
       fontSize: 40,
     });
 
@@ -42,11 +42,11 @@ export default class TitleScene extends Phaser.Scene {
       scene: this,
       x: 380,
       y: 90,
-      texture: "princess",
-      frame: "princess_idle_1",
+      texture: 'princess',
+      frame: 'princess_idle_1',
     });
     this.player.setScale(2);
-    this.player.anims.play("princess_walk", true);
+    this.player.anims.play('princess_walk', true);
     // this.add.atlas(
     //   "princess",
     //   "assets/images/princess.png",
@@ -59,10 +59,10 @@ export default class TitleScene extends Phaser.Scene {
       this,
       config.width / 2,
       config.height / 2 - 100,
-      "blueButton1",
-      "blueButton2",
-      "Play",
-      "Welcome"
+      'blueButton1',
+      'blueButton2',
+      'Play',
+      'Welcome',
     );
 
     // Options
@@ -70,10 +70,10 @@ export default class TitleScene extends Phaser.Scene {
       this,
       config.width / 2,
       config.height / 2,
-      "blueButton1",
-      "blueButton2",
-      "Options",
-      "Options"
+      'blueButton1',
+      'blueButton2',
+      'Options',
+      'Options',
     );
 
     // Credits
@@ -81,15 +81,15 @@ export default class TitleScene extends Phaser.Scene {
       this,
       config.width / 2,
       config.height / 2 + 100,
-      "blueButton1",
-      "blueButton2",
-      "Credits",
-      "Credits"
+      'blueButton1',
+      'blueButton2',
+      'Credits',
+      'Credits',
     );
 
     this.model = this.sys.game.globals.model;
     if (this.model.musicOn === true && this.model.bgMusicPlaying === false) {
-      this.bgMusic = this.sound.add("bgMusic", { volume: 0.5, loop: true });
+      this.bgMusic = this.sound.add('bgMusic', { volume: 0.5, loop: true });
       this.bgMusic.play();
       this.model.bgMusicPlaying = true;
       this.sys.game.globals.bgMusic = this.bgMusic;
@@ -103,8 +103,8 @@ export default class TitleScene extends Phaser.Scene {
         config.width / 2,
         config.height / 2 - offset * 100,
         config.width,
-        config.height
-      )
+        config.height,
+      ),
     );
   }
 

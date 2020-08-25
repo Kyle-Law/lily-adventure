@@ -1,10 +1,10 @@
 const LocalStorage = (() => {
   function saveLocalStorage(score) {
-    localStorage.setItem("score", score);
+    localStorage.setItem('score', score);
   }
 
   function readLocalStorage() {
-    const score = localStorage.getItem("score");
+    const score = localStorage.getItem('score');
 
     if (!score) {
       return 0;

@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable no-plusplus */
 /* eslint-disable class-methods-use-this */
 import Phaser from 'phaser';
@@ -33,9 +34,9 @@ export default class MatterEntity extends Phaser.Physics.Matter.Sprite {
     return this.health <= 0;
   }
 
-  set dead(value){
-    return this.dead = value
-  }
+  // set dead(value) {
+  //   return (this.dead = value);
+  // }
 
   onDeath() {}
 
@@ -46,7 +47,10 @@ export default class MatterEntity extends Phaser.Physics.Matter.Sprite {
       this.onDeath();
       this.drops.forEach(
         (drop) => new DropItem({
-          scene: this.scene, x: this.x, y: this.y, frame: drop,
+          scene: this.scene,
+          x: this.x,
+          y: this.y,
+          frame: drop,
         }),
       );
     }
