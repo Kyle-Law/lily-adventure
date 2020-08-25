@@ -2,7 +2,7 @@ import Phaser from "phaser";
 import Button from "../Objects/Button";
 import Player from "../Classes/Player";
 import config from "../Config/config";
-import { postScore } from "../Objects/API";
+import API from '../Objects/API';
 import LocalStorage from "../Objects/localStorage";
 
 export default class GameOverScene extends Phaser.Scene {
@@ -20,15 +20,18 @@ export default class GameOverScene extends Phaser.Scene {
 
   preload() {
     this.load.image("gameOverTitle", "assets/ui/blue_button02.png");
+    API
   }
 
   create() {
+    this.sys.game.globals.bgMusic.stop();
     const user = this.sys.game.globals.model.userName;
 
     const score = localStorage.getItem("score");
     localStorage.clear();
+    API.postScores(user, score);
 
-    this.score = this.add.text(
+    this.scoreText = this.add.text(
       200,
       250,
       `Hello ${user}, your score is: ${score}`,
@@ -56,18 +59,29 @@ export default class GameOverScene extends Phaser.Scene {
       config.height / 2 + 100,
       "blueButton1",
       "blueButton2",
-      "Submit",
+      "Scores",
       "LeaderBoard"
     );
 
-    this.replayButton = new Button(
-      this,
-      500,
-      config.height / 2 + 100,
-      "blueButton1",
-      "blueButton2",
-      "Replay",
-      "Main"
-    );
+    // this.replayButton = new Button(
+    //   this,
+    //   500,
+    //   400,
+    //   "blueButton1",
+    //   "blueButton2",
+    //   "Menu",
+    //   "Title"
+    // );
+
+    const style =
+      "background: url(assets/ui/blue_button02.png); cursor:pointer; color: #fff;";
+    const menu = this.add.dom(500, 400, "button", style, "Menu");
+    menu.scaleX =4;
+    menu.scaleY = 2;
+    menu.addListener("click");
+
+    menu.on("click", () => {
+      history.go()
+    });
   }
 }

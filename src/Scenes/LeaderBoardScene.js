@@ -1,54 +1,48 @@
-import Phaser from "phaser";
-import Button from "../Objects/Button";
-import { getScores } from "../Objects/API";
+/* eslint no-undef: 0 */
+import 'phaser';
+import Button from '../Objects/Button';
+import API from '../Objects/API';
 
 export default class LeaderBoardScene extends Phaser.Scene {
   constructor() {
-    super("LeaderBoard");
+    super('LeaderBoard');
   }
 
   create() {
-    this.add
-      .text(400, 100, "Leader Board", {
-        color: "white",
-        fontSize: "32px ",
-      })
-      .setOrigin(0.5, 0.5);
+    // this.sys.game.globals.bgMusic.play();
+    this.add.text(400, 50, 'Leader Board', {
+      color: 'white',
+      fontSize: '50px ',
+    }).setOrigin(0.5, 0.5);
 
-    // getScores().then((scores) => {
-    //   const scoreStyle = {
-    //     color: "white",
-    //     fontSize: "38px ",
-    //   };
+    API.getScores().then((data) => {
+      const { result } = data;
 
-    //   scores.sort((x, y) => y.score - x.score);
-    //   const space = 40;
-    //   for (let i = 0; i < 5; i += 1) {
-    //     if (scores[i] !== undefined) {
-    //       this.add.text(
-    //         60,
-    //         200 + space * i,
-    //         `${i + 1}. Name: ${scores[i].user} -- Score: ${scores[i].score}`,
-    //         scoreStyle
-    //       );
-    //     }
-    //   }
-    // });
+      result.sort((a, b) => b.score - a.score);
+      this.add.text(190, 100, 'RANK      NAME                 SCORE',{fontSize:'20px'});
+      this.size = result.length < 8 ? result.length : 8;
 
-    this.menuButton = new Button(
-      this,
-      400,
-      500,
-      "blueButton1",
-      "blueButton2",
-      "Menu",
-      "Title"
-    );
+      let spacing = 100;
 
-    this.menuButton.on("click", () => {
-      this.model = this.sys.game.globals.model;
-      this.model.score = 0;
-      this.scene.start("Title");
+      for (let i = 0; i < this.size; i += 1) {
+        this.add.text(200, 50 + spacing, (i + 1),{fontSize:'20px'});
+        this.add.text(310, 50 + spacing, result[i].user,{fontSize:'20px'});
+        this.add.text(560, 50 + spacing, result[i].score,{fontSize:'20px'});
+
+        spacing += 35;
+      }
+    });
+
+    // this.menuButton = new Button(this, 380, 500, 'blueButton1', 'blueButton2', 'Menu', 'Title');
+    const style =
+      "background: url(assets/ui/blue_button02.png); cursor:pointer; color: #fff;";
+    const menu = this.add.dom(400, 500, "button", style, "Menu").setOrigin(0.5, 0.5);
+    menu.scaleX =4;
+    menu.scaleY = 2;
+    menu.addListener("click");
+
+    menu.on("click", () => {
+      history.go()
     });
   }
 }

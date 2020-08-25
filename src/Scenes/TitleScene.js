@@ -2,10 +2,35 @@ import Phaser from "phaser";
 import config from "../Config/config";
 import Button from "../Objects/Button";
 import Player from "../Classes/Player";
+import Resource from "../Classes/Resource";
+import Enemy from "../Classes/Enemy";
 
 export default class TitleScene extends Phaser.Scene {
   constructor() {
     super("Title");
+  }
+
+  preload(){
+    // load assets needed in our game
+    this.load.image("blueButton1", "assets/ui/blue_button02.png");
+    this.load.image("blueButton2", "assets/ui/blue_button03.png");
+    this.load.image("phaserLogo", "assets/logo.png");
+    this.load.image("box", "assets/ui/grey_box.png");
+    this.load.image("checkedBox", "assets/ui/blue_boxCheckmark.png");
+    this.load.image("upKey", "assets/guide/KeyboardButtonsDir_up.png");
+    this.load.image("downKey", "assets/guide/KeyboardButtonsDir_down.png");
+    this.load.image("leftKey", "assets/guide/KeyboardButtonsDir_left.png");
+    this.load.image("rightKey", "assets/guide/KeyboardButtonsDir_right.png");
+    this.load.image(
+      "spaceKey",
+      "assets/guide/OnscreenKeyboardButtonsSpace.png"
+    );
+    this.load.audio("bgMusic", ["assets/TownTheme.mp3"]);
+    Player.preload(this);
+    Enemy.preload(this);
+    Resource.preload(this);
+    this.load.image("tiles", "assets/images/IceTileset-extruded.png");
+    this.load.tilemapTiledJSON("map", "assets/images/map2.json");
   }
 
   create() {

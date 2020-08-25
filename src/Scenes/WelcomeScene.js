@@ -48,16 +48,18 @@ export default class WelcomeScene extends Phaser.Scene {
     input.scaleY = 0.6;
 
     const style =
-      "background: url(assets/ui/blue_button02.png); cursor:pointer;";
+      "background: url(assets/ui/blue_button02.png); cursor:pointer; color:#fff";
     const gameButton = this.add.dom(590, 412, "button", style, "Play");
     gameButton.scaleX = 1.5;
     gameButton.scaleY = 1.7;
     gameButton.addListener("click");
 
     gameButton.on("click", () => {
+      // history.go()
       if (input.node.value) {
         this.model = this.sys.game.globals.model;
         this.model.userName = input.node.value;
+        this.scene.stop('Main')
         this.scene.start("Main");
       }
     });

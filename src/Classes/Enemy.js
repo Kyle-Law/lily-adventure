@@ -60,19 +60,25 @@ export default class Enemy extends MatterEntity {
   }
 
   attack(target) {
-    if (target.dead || this.dead) {
+    if (this.dead) {
       clearInterval(this.attackTimer);
-      // this.attacking === undefined;
+      console.log(`this has died`)
+      return;
+    }
+
+    if (target.dead){
+      console.log('Player has died')
+      clearInterval(this.attackTimer);
+      this.attacking = false
       return;
     }
     target.hit();
   }
 
   update() {
-    if (this.dead) return;
-    console.log("this.attacking:", this.attacking);
-    // console.log("this.attacking.position:", this.attacking.position || null);
+    if (this.dead ) return;
     if (this.attacking) {
+      if (this.attacking.dead) return
       const direction = this.attacking.position.subtract(this.position);
       if (direction.length() > 24) {
         direction.normalize();
@@ -86,16 +92,17 @@ export default class Enemy extends MatterEntity {
       } else {
         // If close enough to attack the player
         if (this.attackTimer == null) {
-          this.attackTimer = setInterval(this.attack, 1000, this.attacking);
+          this.attackTimer = setInterval(this.attack, 500, this.attacking);
         }
       }
+      // Set enemy's direction
+      this.setFlipX(this.velocity.x < 0);
+      if (Math.abs(this.velocity.x) > 0.1 || Math.abs(this.velocity.y) > 0.1) {
+        this.anims.play(`${this.name}_walk`, true);
+      } else {
+        this.anims.play(`${this.name}_idle`, true);
+      }
     }
-    // Set enemy's direction
-    this.setFlipX(this.velocity.x < 0);
-    if (Math.abs(this.velocity.x) > 0.1 || Math.abs(this.velocity.y) > 0.1) {
-      this.anims.play(`${this.name}_walk`, true);
-    } else {
-      this.anims.play(`${this.name}_idle`, true);
-    }
+    
   }
 }

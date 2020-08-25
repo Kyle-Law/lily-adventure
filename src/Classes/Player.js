@@ -43,13 +43,6 @@ export default class Player extends MatterEntity {
     this.CreatePickupCollisions(playerCollider);
   }
 
-  // reset() {
-  //   this.health = 2;
-  //   this.position = { x: 350, y: 220 };
-  //   this.x = 350;
-  //   this.y = 220;
-  // }
-
   static preload(scene) {
     scene.load.atlas(
       "princess",
@@ -70,6 +63,7 @@ export default class Player extends MatterEntity {
     // this.model = this.sys.game.globals.model;
     const music = this.scene.sound.add("die");
     music.play();
+    // this.destroy()
     // this.anims.stop();
     // this.setTexture("items", 0);
     // this.setOrigin(0.5);

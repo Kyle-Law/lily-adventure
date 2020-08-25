@@ -58,6 +58,8 @@ export default class MainScene extends Phaser.Scene {
       texture: "princess",
       frame: "princess_idle_1",
     });
+    // this.player.health = 2
+    // this.player.dead = false
 
     this.player.inputKeys = this.input.keyboard.addKeys({
       up: Phaser.Input.Keyboard.KeyCodes.UP,

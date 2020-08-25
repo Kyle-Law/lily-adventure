@@ -33,6 +33,10 @@ export default class MatterEntity extends Phaser.Physics.Matter.Sprite {
     return this.health <= 0;
   }
 
+  set dead(value){
+    return this.dead = value
+  }
+
   onDeath() {}
 
   hit() {
