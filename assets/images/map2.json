@@ -630,7 +630,7 @@
                         {
                          "name":"drops",
                          "type":"string",
-                         "value":"[270,272]"
+                         "value":"[276,272]"
                         }, 
                         {
                          "name":"yOrigin",
@@ -658,7 +658,7 @@
                         {
                          "name":"drops",
                          "type":"string",
-                         "value":"[228,228]"
+                         "value":"[270,228]"
                         }, 
                         {
                          "name":"yOrigin",
@@ -686,7 +686,7 @@
                         {
                          "name":"drops",
                          "type":"string",
-                         "value":"[273,273]"
+                         "value":"[275,273]"
                         }, 
                         {
                          "name":"yOrigin",
@@ -714,7 +714,7 @@
                         {
                          "name":"drops",
                          "type":"string",
-                         "value":"[273,273]"
+                         "value":"[273,276]"
                         }, 
                         {
                          "name":"yOrigin",
@@ -742,7 +742,7 @@
                         {
                          "name":"drops",
                          "type":"string",
-                         "value":"[273,273]"
+                         "value":"[270,273]"
                         }, 
                         {
                          "name":"yOrigin",
@@ -798,7 +798,7 @@
                         {
                          "name":"drops",
                          "type":"string",
-                         "value":"[273,273]"
+                         "value":"[275,273]"
                         }, 
                         {
                          "name":"yOrigin",
@@ -826,7 +826,7 @@
                         {
                          "name":"drops",
                          "type":"string",
-                         "value":"[273,273]"
+                         "value":"[275,276]"
                         }, 
                         {
                          "name":"yOrigin",
@@ -865,7 +865,7 @@
                         {
                          "name":"health",
                          "type":"int",
-                         "value":10
+                         "value":50
                         }],
                  "rotation":0,
                  "type":"",

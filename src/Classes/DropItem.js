@@ -19,14 +19,11 @@ export default class DropItem extends Phaser.Physics.Matter.Sprite {
 
   pickup() {
     let score = parseInt(localStorage.getItem("score")) || 0;
-    console.log(this.frame.name);
-    console.log(score);
     if ([270, 276, 275].includes(this.frame.name)) {
       score += 50;
     } else {
       score += 10;
     }
-    console.log(score);
     localStorage.setItem("score", score);
     this.destroy();
     this.sound.play();

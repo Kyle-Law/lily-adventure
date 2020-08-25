@@ -48,7 +48,7 @@ export default class WelcomeScene extends Phaser.Scene {
     input.scaleY = 0.6;
 
     const style =
-      "background: url(assets/ui/blue_button02.png); border: none; border-radius: 5px; color: #fff;";
+      "background: url(assets/ui/blue_button02.png); cursor:pointer;";
     const gameButton = this.add.dom(590, 412, "button", style, "Play");
     gameButton.scaleX = 1.5;
     gameButton.scaleY = 1.7;

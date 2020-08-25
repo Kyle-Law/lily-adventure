@@ -1,5 +1,6 @@
 import Phaser from "phaser";
 import Button from "../Objects/Button";
+import Player from "../Classes/Player";
 import config from "../Config/config";
 import { postScore } from "../Objects/API";
 import LocalStorage from "../Objects/localStorage";
@@ -11,7 +12,10 @@ export default class GameOverScene extends Phaser.Scene {
 
   init() {
     this.model = this.sys.game.globals.model;
-    this.gameScene = this.scene.get("Game");
+    this.gameScene = this.scene.get("Main");
+    this.gameScene.registry.destroy(); // destroy registry
+    this.gameScene.events.off();// disable all active events
+    // this.gameScene.scene.restart();// restart current scene
   }
 
   preload() {
@@ -21,12 +25,12 @@ export default class GameOverScene extends Phaser.Scene {
   create() {
     const user = this.sys.game.globals.model.userName;
 
-    const score = localStorage.getItem("store");
+    const score = localStorage.getItem("score");
     localStorage.clear();
 
     this.score = this.add.text(
-      230,
-      30,
+      200,
+      250,
       `Hello ${user}, your score is: ${score}`,
       {
         fontFamily: "monospace",
@@ -36,17 +40,34 @@ export default class GameOverScene extends Phaser.Scene {
         align: "center",
       }
     );
+    this.player = new Player({
+      scene: this,
+      x: 380,
+      y: 200,
+      texture: "princess",
+      frame: "princess_idle_1",
+    });
+    this.player.setTexture("items", 0);
+    this.player.setScale(2);
 
-    // postScore(this.model.userName, this.model.score);
-
-    this.gameButton = new Button(
+    this.submitButton = new Button(
       this,
-      400,
-      config.height / 2 + 170,
+      300,
+      config.height / 2 + 100,
       "blueButton1",
       "blueButton2",
       "Submit",
       "LeaderBoard"
+    );
+
+    this.replayButton = new Button(
+      this,
+      500,
+      config.height / 2 + 100,
+      "blueButton1",
+      "blueButton2",
+      "Replay",
+      "Main"
     );
   }
 }

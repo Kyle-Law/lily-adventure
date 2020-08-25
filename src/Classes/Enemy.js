@@ -48,7 +48,11 @@ export default class Enemy extends MatterEntity {
     this.scene.matterCollision.addOnCollideStart({
       objectA: [enemySensor],
       callback: (other) => {
-        if (other.gameObjectB && other.gameObjectB.name === "player")
+        if (
+          other.gameObjectB &&
+          other.gameObjectB.name === "player" &&
+          !other.gameObjectB.dead
+        )
           this.attacking = other.gameObjectB;
       },
       context: this.scene,
@@ -58,6 +62,7 @@ export default class Enemy extends MatterEntity {
   attack(target) {
     if (target.dead || this.dead) {
       clearInterval(this.attackTimer);
+      // this.attacking === undefined;
       return;
     }
     target.hit();
@@ -65,6 +70,8 @@ export default class Enemy extends MatterEntity {
 
   update() {
     if (this.dead) return;
+    console.log("this.attacking:", this.attacking);
+    // console.log("this.attacking.position:", this.attacking.position || null);
     if (this.attacking) {
       const direction = this.attacking.position.subtract(this.position);
       if (direction.length() > 24) {
@@ -79,7 +86,7 @@ export default class Enemy extends MatterEntity {
       } else {
         // If close enough to attack the player
         if (this.attackTimer == null) {
-          this.attackTimer = setInterval(this.attack, 500, this.attacking);
+          this.attackTimer = setInterval(this.attack, 1000, this.attacking);
         }
       }
     }
