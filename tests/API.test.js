@@ -1,45 +1,45 @@
-import API from "../src/Objects/API";
+import API from '../src/Objects/API';
 
-it("should return username", () => {
+it('should return username', () => {
   API.getScores()
     .then((data) => {
       expect(data).toEqual(
         expect.arrayContaining([
           expect.objectContaining({
-            user: "Kyle Law",
+            user: 'Kyle Law',
           }),
-        ])
+        ]),
       );
     })
     .catch(() => {});
 });
 
-it("should return score", () => {
+it('should return score', () => {
   API.getScores()
     .then((data) => {
       expect(data).toEqual(
         expect.arrayContaining([
           expect.objectContaining({
-            score: "200",
+            score: '200',
           }),
-        ])
+        ]),
       );
     })
     .catch(() => {});
 });
 
-it("should save score and username", () => {
-  API.postScores("Testing Player", 400)
+it('should save score and username', () => {
+  API.postScores('Testing Player', 400)
     .then((data) => {
-      expect(data.result).toBe("Leaderboard score created correctly.");
+      expect(data.result).toBe('Leaderboard score created correctly.');
     })
     .catch(() => {});
 });
 
-it("should send an object to the API", () => {
+it('should send an object to the API', () => {
   API.postScores()
     .then((data) => {
-      expect(typeof data).toBe("object");
+      expect(typeof data).toBe('object');
     })
     .catch(() => {});
 });

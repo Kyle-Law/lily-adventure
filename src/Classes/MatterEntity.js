@@ -2,7 +2,7 @@
 /* eslint-disable no-plusplus */
 /* eslint-disable class-methods-use-this */
 import Phaser from 'phaser';
-import DropItem from './DropItem.js';
+import DropItem from './DropItem';
 
 export default class MatterEntity extends Phaser.Physics.Matter.Sprite {
   constructor(data) {
