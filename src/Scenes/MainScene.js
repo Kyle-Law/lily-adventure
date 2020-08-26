@@ -1,14 +1,14 @@
-import Phaser from "phaser";
-import Player from "../Classes/Player";
-import Resource from "../Classes/Resource";
-import Enemy from "../Classes/Enemy";
-import LocalStorage from "../Objects/LocalStorage";
-import tiles from "../assets/images/IceTileset-extruded.png";
-import map from "../assets/images/map2.json";
+import Phaser from 'phaser';
+import Player from '../Classes/Player';
+import Resource from '../Classes/Resource';
+import Enemy from '../Classes/Enemy';
+import LocalStorage from '../Objects/LocalStorage';
+import tiles from '../assets/images/IceTileset-extruded.png';
+import map from '../assets/images/map2.json';
 
 export default class MainScene extends Phaser.Scene {
   constructor() {
-    super("Main");
+    super('Main');
     this.enemies = [];
   }
 
@@ -16,16 +16,16 @@ export default class MainScene extends Phaser.Scene {
     Player.preload(this);
     Enemy.preload(this);
     Resource.preload(this);
-    this.load.image("tiles", tiles);
-    this.load.tilemapTiledJSON("map", map);
+    this.load.image('tiles', tiles);
+    this.load.tilemapTiledJSON('map', map);
   }
 
   create() {
-    localStorage.setItem("score", 0);
-    const map = this.make.tilemap({ key: "map" });
+    localStorage.setItem('score', 0);
+    const map = this.make.tilemap({ key: 'map' });
     this.map = map;
-    const tileset = map.addTilesetImage("IceTileset", "tiles", 32, 32, 1, 2);
-    const layer1 = map.createStaticLayer("Tile Layer 1", tileset, 0, 0);
+    const tileset = map.addTilesetImage('IceTileset', 'tiles', 32, 32, 1, 2);
+    const layer1 = map.createStaticLayer('Tile Layer 1', tileset, 0, 0);
     layer1.setCollisionByProperty({ collides: true });
     this.matter.world.convertTilemapLayer(layer1);
 
@@ -38,20 +38,18 @@ export default class MainScene extends Phaser.Scene {
 
     // this.addResources(map);
     this.map
-      .getObjectLayer("Resources")
+      .getObjectLayer('Resources')
       .objects.forEach((resource) => new Resource({ scene: this, resource }));
     this.map
-      .getObjectLayer("Enemies")
-      .objects.forEach((enemy) =>
-        this.enemies.push(new Enemy({ scene: this, enemy }))
-      );
+      .getObjectLayer('Enemies')
+      .objects.forEach((enemy) => this.enemies.push(new Enemy({ scene: this, enemy })));
 
     this.player = new Player({
       scene: this,
       x: 350,
       y: 220,
-      texture: "princess",
-      frame: "princess_idle_1",
+      texture: 'princess',
+      frame: 'princess_idle_1',
     });
     // this.player.health = 2
     // this.player.dead = false
@@ -71,8 +69,8 @@ export default class MainScene extends Phaser.Scene {
 
     this.scoreText = this.add
       .text(200, 150, `Score: ${LocalStorage.readLocalStorage()}`, {
-        fontSize: "20px",
-        fill: "#000",
+        fontSize: '20px',
+        fill: '#000',
       })
       .setScrollFactor(0)
       .setDepth(100);
