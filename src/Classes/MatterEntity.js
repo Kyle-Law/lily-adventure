@@ -1,14 +1,12 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-plusplus */
 /* eslint-disable class-methods-use-this */
-import Phaser from 'phaser';
-import DropItem from './DropItem';
+import Phaser from "phaser";
+import DropItem from "./DropItem";
 
 export default class MatterEntity extends Phaser.Physics.Matter.Sprite {
   constructor(data) {
-    const {
-      name, scene, x, y, health, drops, texture, frame, depth,
-    } = data;
+    const { name, scene, x, y, health, drops, texture, frame, depth } = data;
     super(scene.matter.world, x, y, texture, frame);
     this.x += this.width / 2;
     this.y -= this.height / 2;
@@ -34,10 +32,6 @@ export default class MatterEntity extends Phaser.Physics.Matter.Sprite {
     return this.health <= 0;
   }
 
-  // set dead(value) {
-  //   return (this.dead = value);
-  // }
-
   onDeath() {}
 
   hit() {
@@ -46,12 +40,13 @@ export default class MatterEntity extends Phaser.Physics.Matter.Sprite {
     if (this.dead) {
       this.onDeath();
       this.drops.forEach(
-        (drop) => new DropItem({
-          scene: this.scene,
-          x: this.x,
-          y: this.y,
-          frame: drop,
-        }),
+        (drop) =>
+          new DropItem({
+            scene: this.scene,
+            x: this.x,
+            y: this.y,
+            frame: drop,
+          })
       );
     }
   }

@@ -1,30 +1,32 @@
 /* eslint-disable import/extensions */
 /* eslint-disable no-lonely-if */
-import Phaser from 'phaser';
-import MatterEntity from './MatterEntity.js';
+import Phaser from "phaser";
+import MatterEntity from "./MatterEntity.js";
+import enemyPng from "../assets/images/enemies.png";
+import enemyAtlas from "../assets/images/enemies_atlas.json";
+import enemyAnim from "../assets/images/enemies_anim.json";
+import bearSound from "../assets/audio/bear.mp3";
+import wolfSound from "../assets/audio/wolf.mp3";
+import entSound from "../assets/audio/ent.mp3";
 
 export default class Enemy extends MatterEntity {
   static preload(scene) {
-    scene.load.atlas(
-      'enemies',
-      'src/assets/images/enemies.png',
-      'src/assets/images/enemies_atlas.json',
-    );
-    scene.load.animation('enemies_anim', 'src/assets/images/enemies_anim.json');
-    scene.load.audio('bear', 'src/assets/audio/bear.mp3');
-    scene.load.audio('wolf', 'src/assets/audio/wolf.mp3');
-    scene.load.audio('ent', 'src/assets/audio/ent.mp3');
+    scene.load.atlas("enemies", enemyPng, enemyAtlas);
+    scene.load.animation("enemies_anim", enemyAnim);
+    scene.load.audio("bear", bearSound);
+    scene.load.audio("wolf", wolfSound);
+    scene.load.audio("ent", entSound);
   }
 
   constructor(data) {
     const { scene, enemy } = data;
     const drops = [270, 270];
-    const health = enemy.properties.find((p) => p.name === 'health').value;
+    const health = enemy.properties.find((p) => p.name === "health").value;
     super({
       scene,
       x: enemy.x,
       y: enemy.y,
-      texture: 'enemies',
+      texture: "enemies",
       frame: `${enemy.name}_idle_1`,
       drops,
       health,
@@ -34,11 +36,11 @@ export default class Enemy extends MatterEntity {
     const { Body, Bodies } = Phaser.Physics.Matter.Matter;
     const enemyCollider = Bodies.circle(this.x, this.y, 12, {
       isSensor: false,
-      label: 'enemyCollider',
+      label: "enemyCollider",
     });
     const enemySensor = Bodies.circle(this.x, this.y, 80, {
       isSensor: true,
-      label: 'enemySensor',
+      label: "enemySensor",
     });
     const compoundBody = Body.create({
       parts: [enemyCollider, enemySensor],
@@ -50,10 +52,11 @@ export default class Enemy extends MatterEntity {
       objectA: [enemySensor],
       callback: (other) => {
         if (
-          other.gameObjectB
-          && other.gameObjectB.name === 'player'
-          && !other.gameObjectB.dead
-        ) this.attacking = other.gameObjectB;
+          other.gameObjectB &&
+          other.gameObjectB.name === "player" &&
+          !other.gameObjectB.dead
+        )
+          this.attacking = other.gameObjectB;
       },
       context: this.scene,
     });
