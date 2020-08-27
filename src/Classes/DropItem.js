@@ -1,34 +1,32 @@
 /* eslint-disable radix */
-import Phaser from 'phaser';
+import Phaser from "phaser";
 
 export default class DropItem extends Phaser.Physics.Matter.Sprite {
   constructor(data) {
-    const {
-      scene, x, y, frame,
-    } = data;
-    super(scene.matter.world, x, y, 'items', frame);
+    const { scene, x, y, frame } = data;
+    super(scene.matter.world, x, y, "items", frame);
     this.scene.add.existing(this);
     const { Bodies } = Phaser.Physics.Matter.Matter;
     const circleCollider = Bodies.circle(this.x, this.y, 10, {
       isSensor: false,
-      label: 'collider',
+      label: "collider",
     });
     this.setExistingBody(circleCollider);
     this.setFrictionAir(1);
     this.setScale(0.5);
-    this.sound = this.scene.sound.add('pickup');
+    this.sound = this.scene.sound.add("pickup");
   }
 
-  pickup() {
-    let score = parseInt(localStorage.getItem('score')) || 0;
+  pickup = () => {
+    let score = parseInt(localStorage.getItem("score")) || 0;
     if ([270, 276, 275].includes(this.frame.name)) {
       score += 50;
     } else {
       score += 10;
     }
-    localStorage.setItem('score', score);
+    localStorage.setItem("score", score);
     this.destroy();
     this.sound.play();
     return true;
-  }
+  };
 }

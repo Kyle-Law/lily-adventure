@@ -1,12 +1,12 @@
 /* eslint-disable import/extensions */
-import Phaser from 'phaser';
-import MatterEntity from './MatterEntity.js';
-import princessPng from '../assets/images/princess.png';
-import princessAtlas from '../assets/images/princess_atlas.json';
-import princessAnim from '../assets/images/princess_anim.json';
-import items from '../assets/images/weapons.png';
-import playerSound from '../assets/audio/player.mp3';
-import dieSound from '../assets/audio/die.mp3';
+import Phaser from "phaser";
+import MatterEntity from "./MatterEntity.js";
+import princessPng from "../assets/images/princess.png";
+import princessAtlas from "../assets/images/princess_atlas.json";
+import princessAnim from "../assets/images/princess_anim.json";
+import items from "../assets/images/weapons.png";
+import playerSound from "../assets/audio/player.mp3";
+import dieSound from "../assets/audio/die.mp3";
 
 export default class Player extends MatterEntity {
   constructor(data) {
@@ -14,7 +14,7 @@ export default class Player extends MatterEntity {
       ...data,
       health: 2,
       drops: [],
-      name: 'player',
+      name: "player",
     });
     this.touching = [];
     // Weapon
@@ -22,8 +22,8 @@ export default class Player extends MatterEntity {
       this.scene,
       0,
       0,
-      'items',
-      163,
+      "items",
+      163
     );
     this.spriteWeapon.setScale(0.8);
     this.spriteWeapon.setOrigin(0.25, 0.75);
@@ -33,11 +33,11 @@ export default class Player extends MatterEntity {
 
     const playerCollider = Bodies.circle(this.x, this.y, 12, {
       isSensor: false,
-      label: 'playerCollider',
+      label: "playerCollider",
     });
     const playerSensor = Bodies.circle(this.x, this.y, 24, {
       isSensor: true,
-      label: 'playerSensor',
+      label: "playerSensor",
     });
     const compoundBody = Body.create({
       parts: [playerCollider, playerSensor],
@@ -50,23 +50,24 @@ export default class Player extends MatterEntity {
   }
 
   static preload(scene) {
-    scene.load.atlas('princess', princessPng, princessAtlas);
-    scene.load.animation('princess_anim', princessAnim);
-    scene.load.spritesheet('items', items, {
+    scene.load.atlas("princess", princessPng, princessAtlas);
+    scene.load.animation("princess_anim", princessAnim);
+    scene.load.spritesheet("items", items, {
       frameWidth: 32,
       frameHeight: 32,
     });
-    scene.load.audio('player', playerSound);
-    scene.load.audio('die', dieSound);
+    scene.load.audio("player", playerSound);
+    scene.load.audio("die", dieSound);
   }
 
   onDeath() {
-    const music = this.scene.sound.add('die');
+    const music = this.scene.sound.add("die");
     music.play();
-    this.scene.scene.start('GameOver');
+    this.scene.scene.start("GameOver");
   }
 
   update() {
+    console.log(this.touching);
     if (this.dead) return;
     const speed = 2.5;
     const playerVelocity = new Phaser.Math.Vector2();
@@ -88,15 +89,15 @@ export default class Player extends MatterEntity {
     this.setVelocity(playerVelocity.x, playerVelocity.y);
 
     if (Math.abs(this.velocity.x) > 0.1 || Math.abs(this.velocity.y) > 0.1) {
-      this.anims.play('princess_walk', true);
+      this.anims.play("princess_walk", true);
     } else {
-      this.anims.play('princess_idle', true);
+      this.anims.play("princess_idle", true);
     }
     this.spriteWeapon.setPosition(this.x, this.y);
     this.weaponRotate();
   }
 
-  weaponRotate() {
+  weaponRotate = () => {
     const { space } = this.inputKeys;
     if (space.isDown) {
       this.weaponRotation += 6;
@@ -113,7 +114,7 @@ export default class Player extends MatterEntity {
     } else {
       this.spriteWeapon.setAngle(this.weaponRotation);
     }
-  }
+  };
 
   CreateMiningCollisions(playerSensor) {
     this.scene.matterCollision.addOnCollideStart({
@@ -121,6 +122,7 @@ export default class Player extends MatterEntity {
       callback: (other) => {
         if (other.bodyB.isSensor) return;
         this.touching.push(other.gameObjectB);
+        // console.log(this.touching);
       },
       context: this.scene,
     });
@@ -129,8 +131,9 @@ export default class Player extends MatterEntity {
       objectA: [playerSensor],
       callback: (other) => {
         this.touching = this.touching.filter(
-          (gameObject) => gameObject !== other.gameObjectB,
+          (gameObject) => gameObject !== other.gameObjectB
         );
+        // console.log(this.touching);
       },
       context: this.scene,
     });
@@ -158,13 +161,13 @@ export default class Player extends MatterEntity {
     });
   }
 
-  whackStuff() {
+  whackStuff = () => {
     this.touching = this.touching.filter(
-      (gameObject) => gameObject.hit && !gameObject.dead,
+      (gameObject) => gameObject.hit && !gameObject.dead
     );
     this.touching.forEach((gameobject) => {
       gameobject.hit();
       if (gameobject.dead) gameobject.destroy();
     });
-  }
+  };
 }
