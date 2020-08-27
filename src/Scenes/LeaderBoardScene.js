@@ -48,7 +48,7 @@ export default class LeaderBoardScene extends Phaser.Scene {
     menu.addListener('click');
 
     menu.on('click', () => {
-      history.go();
+      this.scene.start('Title');
     });
   }
 }

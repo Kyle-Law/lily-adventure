@@ -58,11 +58,9 @@ export default class WelcomeScene extends Phaser.Scene {
     gameButton.addListener('click');
 
     gameButton.on('click', () => {
-      // history.go()
       if (input.node.value) {
         this.model = this.sys.game.globals.model;
         this.model.userName = input.node.value;
-        this.scene.stop('Main');
         this.scene.start('Main');
       }
     });
