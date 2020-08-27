@@ -61,17 +61,8 @@ export default class Player extends MatterEntity {
   }
 
   onDeath() {
-    // this.sys.game.globals.bgMusic.stop();
-    // this.model = this.sys.game.globals.model;
     const music = this.scene.sound.add('die');
     music.play();
-    // this.destroy()
-    // this.anims.stop();
-    // this.setTexture("items", 0);
-    // this.setOrigin(0.5);
-    // this.spriteWeapon.destroy();
-    // this.scene.scene.restart();
-
     this.scene.scene.start('GameOver');
   }
 

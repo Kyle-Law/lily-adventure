@@ -12,7 +12,6 @@ export default class LeaderBoardScene extends Phaser.Scene {
   }
 
   create() {
-    // this.sys.game.globals.bgMusic.play();
     this.add
       .text(400, 50, 'Leader Board', {
         color: 'white',
@@ -40,7 +39,6 @@ export default class LeaderBoardScene extends Phaser.Scene {
       }
     });
 
-    // this.menuButton = new Button(this, 380, 500, 'blueButton1', 'blueButton2', 'Menu', 'Title');
     const style = `background: url(${blue_button02}); cursor:pointer; color: #fff;`;
     const menu = this.add
       .dom(400, 500, 'button', style, 'Menu')

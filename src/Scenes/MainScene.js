@@ -29,14 +29,6 @@ export default class MainScene extends Phaser.Scene {
     layer1.setCollisionByProperty({ collides: true });
     this.matter.world.convertTilemapLayer(layer1);
 
-    // const scoreText = this.add.text(
-    //   16,
-    //   16,
-    //   `score:${this.sys.game.globals.model.score}`,
-    //   { fontSize: "32px", fill: "#000" }
-    // );
-
-    // this.addResources(map);
     this.map
       .getObjectLayer('Resources')
       .objects.forEach((resource) => new Resource({ scene: this, resource }));

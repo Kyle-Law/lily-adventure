@@ -15,7 +15,6 @@ export default class GameOverScene extends Phaser.Scene {
     this.gameScene = this.scene.get('Main');
     this.gameScene.registry.destroy(); // destroy registry
     this.gameScene.events.off(); // disable all active events
-    // this.gameScene.scene.restart();// restart current scene
   }
 
   preload() {

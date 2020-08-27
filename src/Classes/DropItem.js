@@ -29,7 +29,6 @@ export default class DropItem extends Phaser.Physics.Matter.Sprite {
     localStorage.setItem('score', score);
     this.destroy();
     this.sound.play();
-    // this.sys.game.globals.model.score += 1;
     return true;
   }
 }

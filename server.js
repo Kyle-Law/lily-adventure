@@ -11,11 +11,6 @@ app.get('*', (_req, res) => {
   res.sendFile(HTML_FILE);
 });
 
-// app.get("*", (_req, res) => {
-//   const index = path.join(__dirname, "dist", "index.html");
-//   res.sendFile(index);
-// });
-
 const PORT = process.env.PORT || 8080;
 
 app.listen(PORT, () => {
