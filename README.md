@@ -2,6 +2,8 @@
 
 > A simple game built by Phaser.js
 
+The player can hit her surroundings to collect items and gain scores. Try to avoid enemies as much as possible and the enemies will get triggered within a certain range.
+
 ![image](https://user-images.githubusercontent.com/55923773/91373006-d7427400-e847-11ea-971e-d547b332ce13.png)
 
 ## Live Version

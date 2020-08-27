@@ -61,7 +61,7 @@ export default class Enemy extends MatterEntity {
     });
   }
 
-  attack(target) {
+  attack = (target) => {
     if (this.dead) {
       clearInterval(this.attackTimer);
       return;
@@ -73,7 +73,7 @@ export default class Enemy extends MatterEntity {
       return;
     }
     target.hit();
-  }
+  };
 
   update() {
     if (this.dead) return;
