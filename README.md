@@ -14,12 +14,15 @@ The player can hit her surroundings to collect items and gain scores.
 ## Game Mechanics
 
 ![image](https://user-images.githubusercontent.com/55923773/91498313-1b8a4e80-e8f2-11ea-912a-19794bc89a95.png)
+<br>
 Use Direction Keys to move, Space Key to attack.
 
 ![image](https://user-images.githubusercontent.com/55923773/91498864-1da0dd00-e8f3-11ea-8249-1dba4bcedbd6.png)
+<br>
 Attack Resources and gain dropped items to collect scores.
 
 ![image](https://user-images.githubusercontent.com/55923773/91498800-fcd88780-e8f2-11ea-84f9-15f6bfbfab9a.png)
+<br>
 Try to avoid enemies as much as possible and the enemies will get triggered within a certain range.
 
 ## Inheritance Diagram
