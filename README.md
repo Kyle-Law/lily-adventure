@@ -9,6 +9,7 @@ The player can hit her surroundings to collect items and gain scores. Try to avo
 ## Live Version
 
 View the live version [HERE](https://lily-adventure.herokuapp.com/)
+View the project walkthrough [HERE](https://www.loom.com/share/5176c65cf9d24a35a81ea65554b55595)
 
 ## Built With
 
