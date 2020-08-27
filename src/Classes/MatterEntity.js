@@ -32,7 +32,9 @@ export default class MatterEntity extends Phaser.Physics.Matter.Sprite {
     return this.health <= 0;
   }
 
-  onDeath() {}
+  onDeath = () => {
+    // this.destroy()
+  }
 
   hit = () => {
     if (this.sound) this.sound.play();

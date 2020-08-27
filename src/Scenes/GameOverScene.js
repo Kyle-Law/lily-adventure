@@ -83,7 +83,7 @@ export default class GameOverScene extends Phaser.Scene {
       this.scene.start("LeaderBoard");
     });
 
-    const menu = this.add.dom(520, 400, "button", style, "Menu");
+    const menu = this.add.dom(520, 400, "button", style, "Restart");
     menu.scaleX = 4;
     menu.scaleY = 2;
     menu.addListener("click");

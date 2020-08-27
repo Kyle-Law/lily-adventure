@@ -45,4 +45,11 @@ export default class Resource extends MatterEntity {
     this.setStatic(true);
     this.setOrigin(0.5, yOrigin);
   }
+
+  // onDeath = () => {
+  //   const music = this.scene.sound.add("die");
+  //   music.play();
+  //   this.destory()
+  //   this.scene.scene.start("GameOver");
+  // }
 }

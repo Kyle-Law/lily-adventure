@@ -60,9 +60,10 @@ export default class Player extends MatterEntity {
     scene.load.audio("die", dieSound);
   }
 
-  onDeath() {
+  onDeath = () => {
     const music = this.scene.sound.add("die");
     music.play();
+    // this.destory()
     this.scene.scene.start("GameOver");
   }
 
@@ -130,6 +131,7 @@ export default class Player extends MatterEntity {
     this.scene.matterCollision.addOnCollideEnd({
       objectA: [playerSensor],
       callback: (other) => {
+        // console.log(other.gameObjectB)
         this.touching = this.touching.filter(
           (gameObject) => gameObject !== other.gameObjectB
         );
@@ -145,6 +147,7 @@ export default class Player extends MatterEntity {
       callback: (other) => {
         if (other.gameObjectB && other.gameObjectB.pickup) {
           other.gameObjectB.pickup();
+          this.touching = this.touching.filter(obj => obj !== other.gameObjectB)
         }
       },
       context: this.scene,
@@ -155,6 +158,7 @@ export default class Player extends MatterEntity {
       callback: (other) => {
         if (other.gameObjectB && other.gameObjectB.pickup) {
           other.gameObjectB.pickup();
+          this.touching = this.touching.filter(obj => obj !== other.gameObjectB)
         }
       },
       context: this.scene,
@@ -167,7 +171,10 @@ export default class Player extends MatterEntity {
     );
     this.touching.forEach((gameobject) => {
       gameobject.hit();
-      if (gameobject.dead) gameobject.destroy();
+      if (gameobject.dead) {
+        this.touching = this.touching.filter(obj => obj !== gameobject)
+        gameobject.destroy()
+      };
     });
   };
 }
