@@ -1,8 +1,8 @@
-# Brocollily
+# Lily's Adventure
 
 > A simple game built by Phaser.js
 
-![image](https://user-images.githubusercontent.com/55923773/91371095-af9cdd00-e842-11ea-9e94-0d748e34eba3.png)
+![image](https://user-images.githubusercontent.com/55923773/91373006-d7427400-e847-11ea-971e-d547b332ce13.png)
 
 ## Live Version
 
